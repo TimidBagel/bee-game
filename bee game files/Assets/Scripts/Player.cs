@@ -6,29 +6,50 @@ public class Player : MonoBehaviour
 {
     public float bees;
     public GameObject baseBee;
+    public float Honey;
+    public float Daisies;
+    public GameObject Daisy;
+    public float AddedHoney;
+    float DaisyMultiplier; // Value Set in Update Function
+    public World world;
+    public TMPro.TextMeshProUGUI HoneyCounter;
     // Start is called before the first frame update
     void Start()
     {
+        InvokeRepeating("addHoney", 1, 1);
+    }
+    void addHoney()
+    {
+        Honey += AddedHoney;
+    }
+    void calcRate()
+    {
         
     }
-
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.UpArrow))
+        AddedHoney = Mathf.Round(bees * DaisyMultiplier);
+        HoneyCounter.text = "Honey:"+ Honey.ToString();
+        if (Input.GetKeyUp("b") && Honey >= 10)
         {
             bees += 1;
+            Honey -= 5;
         }
-        if (Input.GetKey(KeyCode.DownArrow) && bees > 1) 
+        if(Input.GetKeyUp("d") && Honey >= 100)
         {
-            bees -= 1;
+            Daisies += 1;
+            Honey -= 10;
         }
-        GameObject[] amountBees = GameObject.FindGameObjectsWithTag("Bees");
-        Debug.Log(amountBees.Length);
+            
+        
        
+        GameObject[] amountBees = GameObject.FindGameObjectsWithTag("Bees");
+        GameObject[] amountDaisies = GameObject.FindGameObjectsWithTag("Daisies");
+        DaisyMultiplier = (Daisies * 1.1f);
         if(amountBees.Length < bees)
         {
-            Instantiate(baseBee, new Vector3(transform.position.x + Random.Range(-55, 55), transform.position.y + Random.Range(-55, 55)), Quaternion.identity);
+            Instantiate(baseBee, new Vector3(transform.position.x + Random.Range(-75, 75), transform.position.y + Random.Range(-45, 45)), Quaternion.identity);
         }
         else if(amountBees.Length > bees)
         {
@@ -38,6 +59,19 @@ public class Player : MonoBehaviour
             }
             
         }
-        
+
+        if (amountDaisies.Length < Daisies)
+        {
+            Instantiate(Daisy, new Vector3(transform.position.x + Random.Range(-75, 75), transform.position.y + Random.Range(-45, 45)), Quaternion.identity);
+        }
+        else if (amountDaisies.Length > Daisies)
+        {
+            for (float i = amountBees.Length - bees; i > 0; i--)
+            {
+                Destroy(GameObject.FindWithTag("Daisies"));
+            }
+
+        }
+
     }
 }
