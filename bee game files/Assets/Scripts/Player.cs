@@ -9,10 +9,13 @@ public class Player : MonoBehaviour
     public float Honey;
     public float Daisies;
     public GameObject Daisy;
+    public float costOfDaisies = 100;
+    public float CostofBees = 50;
     public float AddedHoney;
     float DaisyMultiplier; // Value Set in Update Function
     public World world;
     public TMPro.TextMeshProUGUI HoneyCounter;
+    public float DaisyPower;
     // Start is called before the first frame update
     void Start()
     {
@@ -29,24 +32,26 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        AddedHoney = Mathf.Round(bees * DaisyMultiplier);
-        HoneyCounter.text = "Honey:"+ Honey.ToString();
-        if (Input.GetKeyUp("b") && Honey >= 10)
+        AddedHoney = (bees * DaisyMultiplier) - bees;
+        HoneyCounter.text = "Honey:"+ Mathf.RoundToInt(Honey).ToString();
+        if (Input.GetKeyUp("b") && Honey >= CostofBees)
         {
             bees += 1;
-            Honey -= 5;
+            Honey -= CostofBees;
+            CostofBees += (CostofBees * 0.05f);
         }
-        if(Input.GetKeyUp("d") && Honey >= 100)
+        if(Input.GetKeyUp("d") && Honey >= costOfDaisies)
         {
             Daisies += 1;
-            Honey -= 10;
+            Honey -= costOfDaisies;
+            costOfDaisies += (costOfDaisies * 0.05f);
         }
             
         
        
         GameObject[] amountBees = GameObject.FindGameObjectsWithTag("Bees");
         GameObject[] amountDaisies = GameObject.FindGameObjectsWithTag("Daisies");
-        DaisyMultiplier = (Daisies * 1.1f);
+        DaisyMultiplier = (Daisies * DaisyPower);
         if(amountBees.Length < bees)
         {
             Instantiate(baseBee, new Vector3(transform.position.x + Random.Range(-75, 75), transform.position.y + Random.Range(-45, 45)), Quaternion.identity);
