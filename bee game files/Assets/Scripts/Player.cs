@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class Player : MonoBehaviour
 {
     public float bees;
@@ -54,7 +54,16 @@ public class Player : MonoBehaviour
         DaisyMultiplier = (Daisies * DaisyPower);
         if(amountBees.Length < bees)
         {
-            Instantiate(baseBee, new Vector3(transform.position.x + Random.Range(-75, 75), transform.position.y + Random.Range(-45, 45)), Quaternion.identity);
+            if (SceneManager.GetActiveScene().name.Contains("Kit"))
+            {
+                Instantiate(baseBee, new Vector3(transform.position.x + Random.Range(-15, 15), transform.position.y + Random.Range(-5, 5)), Quaternion.identity);
+            }
+            else
+            {
+                Instantiate(baseBee, new Vector3(Random.Range(-5, 5), 0.75f, Random.Range(-5, 5)), Quaternion.identity);
+
+            }
+           
         }
         else if(amountBees.Length > bees)
         {
@@ -67,7 +76,15 @@ public class Player : MonoBehaviour
 
         if (amountDaisies.Length < Daisies)
         {
-            Instantiate(Daisy, new Vector3(transform.position.x + Random.Range(-75, 75), transform.position.y + Random.Range(-45, 45)), Quaternion.identity);
+            if (SceneManager.GetActiveScene().name.Contains("Kit"))
+            {
+                Instantiate(Daisy, new Vector3(transform.position.x + Random.Range(-15, 15), transform.position.y + Random.Range(-5, 5)), Quaternion.identity);
+            }
+            else
+            {
+                Instantiate(Daisy, new Vector3(Random.Range(-5, 5), 0.75f, Random.Range(-5, 5)), Quaternion.identity);
+
+            }
         }
         else if (amountDaisies.Length > Daisies)
         {
