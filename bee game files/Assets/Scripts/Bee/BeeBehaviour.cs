@@ -19,15 +19,21 @@ public class BeeBehaviour : MonoBehaviour
 		motor = GetComponent<NavMeshAgent>();
 		GetPoints();
 		UpdateDestination();
+
+		Time.timeScale = 0;
 	}
 
 	private void Update()
 	{
+
 		if (Vector3.Distance(transform.position, target) < 1)
 		{
 			IterateWaypointIndex();
 			UpdateDestination();
 		}
+
+		if (Input.GetKeyDown(KeyCode.Space))
+			Time.timeScale = 1;
 	}
 
 	private void UpdateDestination()
@@ -43,10 +49,5 @@ public class BeeBehaviour : MonoBehaviour
 			waypointIndex = 0;
 	}
 
-	public void GetPoints()
-	{
-		waypoints = GameManager.gameInstance.GetWaypoints(numOfPoints);
-
-		for (int i = 0; i < waypoints.Length; i++) { Debug.Log(transform.name + waypoints[i]); }
-	}
+	public void GetPoints() { waypoints = GameManager.gameInstance.GetWaypoints(numOfPoints); }
 }
