@@ -4,23 +4,20 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Bees
-<<<<<<< Updated upstream
-  - interactable
-=======
   - Daisies
+  - Bees
   - Sunflowers
->>>>>>> Stashed changes
+  - interactable
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - PostFX
+  - 
   - Water
   - UI
   - 
   - 
-  - 
+  - Interactable
   - 
   - 
   - 
