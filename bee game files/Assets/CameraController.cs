@@ -8,39 +8,65 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-	public Transform cameraTransform;
 	public Camera cam;
+	public Transform focusTransform;
 
 	public float normalSpeed;
 	public float fastSpeed;
 	private float movementSpeed;
 	public float movementTime;
-	public float rotationAmount;
-	public float zoomAmount;
-	public float targetSize;
+	public float cameraZoomRate;
+	public float targetCameraSize;
+	public float focusSpeed;
 
-	public Vector3 newPosition;
-	public Quaternion newRotation;
+	private Vector3 newPosition;
 
-	public Vector3 dragStartPosition;
-	public Vector3 dragCurrentPosition;
+	private Vector3 dragStartPosition;
+	private Vector3 dragCurrentPosition;
 
 	private void Start()
 	{
 		newPosition = transform.position;
-		newRotation = transform.rotation;
 	}
 
 	private void Update()
 	{
-		HandleMouseInput();
-		HandleMovement();
+		if (focusTransform != null)
+		{
+			transform.position = Vector3.Lerp(transform.position, focusTransform.position, focusSpeed * Time.deltaTime);
+			newPosition = focusTransform.position;
+		}
+		else
+		{
+			HandleMouseInput();
+			HandleMovement();
+		}
+
+		if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.S) || 
+			Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.DownArrow) || 
+			Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow))
+		{
+			focusTransform = null;
+		}
+
+		if (Input.GetMouseButtonDown(0))
+		{
+			Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+			RaycastHit hit;
+
+			if (Physics.Raycast(ray, out hit))
+			{
+				if (hit.collider.tag == "interactable")
+					focusTransform = hit.transform;
+			}
+		}
 	}
 
 	private void HandleMouseInput()
 	{
+
 		if (Input.mouseScrollDelta.y != 0)
-			targetSize -= Input.mouseScrollDelta.y * zoomAmount * Time.deltaTime * 10;
+			targetCameraSize -= Input.mouseScrollDelta.y * cameraZoomRate * Time.deltaTime * 10;
 		if (Input.GetMouseButtonDown(1))
 		{
 			Plane plane = new Plane(Vector3.up, Vector3.zero);
@@ -87,21 +113,15 @@ public class CameraController : MonoBehaviour
 		if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
 			newPosition += (transform.right * movementSpeed);
 
-//		- alters rotation variable based on keyboard input
-		if (Input.GetKey(KeyCode.Q))
-			newRotation *= Quaternion.Euler(Vector3.up * rotationAmount);
-		if (Input.GetKey(KeyCode.E))
-			newRotation *= Quaternion.Euler(Vector3.up * -rotationAmount);
-
 //		- changes the camera size target based on keyboard input, must be greater than 1
-		if (Input.GetKey(KeyCode.F) && targetSize < 20)
-			targetSize += zoomAmount * Time.deltaTime;
+		if (Input.GetKey(KeyCode.F) && targetCameraSize < 20)
+			targetCameraSize += cameraZoomRate * Time.deltaTime;
 		if (Input.GetKey(KeyCode.R) && cam.orthographicSize > 1)
-			targetSize -= zoomAmount * Time.deltaTime;
-		if (targetSize <= 1)
-			targetSize = 1;
-		if (targetSize >= 20)
-			targetSize = 20;
+			targetCameraSize -= cameraZoomRate * Time.deltaTime;
+		if (targetCameraSize <= 1)
+			targetCameraSize = 1;
+		if (targetCameraSize >= 20)
+			targetCameraSize = 20;
 		if (cam.orthographicSize < 1)
 			cam.orthographicSize = 1;
 		if (cam.orthographicSize > 20)
@@ -109,9 +129,12 @@ public class CameraController : MonoBehaviour
 
 //		- gradually moves the camera based on altered movement variable over time
 		transform.position = Vector3.Lerp(transform.position, newPosition, Time.deltaTime * movementTime);
-//		- gradually rotates the camera based on altered rotation variable over time
-		transform.rotation = Quaternion.Lerp(transform.rotation, newRotation, Time.deltaTime * movementTime);
 //		- gradually increases and decreases the camera size based on altered camera size target variable over time
-		cam.orthographicSize = Mathf.Lerp(cam.orthographicSize, targetSize, Time.deltaTime * zoomAmount);
+		cam.orthographicSize = Mathf.Lerp(cam.orthographicSize, targetCameraSize, Time.deltaTime * cameraZoomRate);
+	}
+
+	private void HandleZooming()
+	{
+
 	}
 }

@@ -137,7 +137,7 @@ GameObject:
   - component: {fileID: 1360804}
   m_Layer: 0
   m_Name: Cube
-  m_TagString: Untagged
+  m_TagString: interactable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -233,7 +233,7 @@ GameObject:
   - component: {fileID: 693257356}
   m_Layer: 0
   m_Name: Sphere (2)
-  m_TagString: Untagged
+  m_TagString: interactable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -451,18 +451,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec83e4df0d9184a4b829fa2e04d57605, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraTransform: {fileID: 963194228}
   cam: {fileID: 963194227}
+  focusTransform: {fileID: 0}
   normalSpeed: 0.1
   fastSpeed: 0.5
   movementTime: 10
-  rotationAmount: 1
-  zoomAmount: 10
-  targetSize: 5
-  newPosition: {x: 0, y: 0, z: 0}
-  newRotation: {x: 0, y: 0, z: 0, w: 0}
-  dragStartPosition: {x: 0, y: 0, z: 0}
-  dragCurrentPosition: {x: 0, y: 0, z: 0}
+  cameraZoomRate: 10
+  targetCameraSize: 5
+  focusSpeed: 5
 --- !u!1 &787060810
 GameObject:
   m_ObjectHideFlags: 0
@@ -477,7 +473,7 @@ GameObject:
   - component: {fileID: 787060811}
   m_Layer: 0
   m_Name: Sphere (1)
-  m_TagString: Untagged
+  m_TagString: interactable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -572,7 +568,7 @@ GameObject:
   - component: {fileID: 802117957}
   m_Layer: 0
   m_Name: Sphere (3)
-  m_TagString: Untagged
+  m_TagString: interactable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -773,7 +769,7 @@ MonoBehaviour:
     m_Bits: 4294967295
   stopNaNPropagation: 1
   finalBlitToCameraTarget: 0
-  antialiasingMode: 0
+  antialiasingMode: 1
   temporalAntialiasing:
     jitterSpread: 0.75
     sharpness: 0.25
@@ -782,7 +778,7 @@ MonoBehaviour:
   subpixelMorphologicalAntialiasing:
     quality: 2
   fastApproximateAntialiasing:
-    fastMode: 0
+    fastMode: 1
     keepAlpha: 0
   fog:
     enabled: 1
@@ -829,7 +825,7 @@ GameObject:
   - component: {fileID: 1219849403}
   m_Layer: 0
   m_Name: focus test
-  m_TagString: Untagged
+  m_TagString: interactable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1021,7 +1017,7 @@ GameObject:
   - component: {fileID: 1443380417}
   m_Layer: 0
   m_Name: Sphere
-  m_TagString: Untagged
+  m_TagString: interactable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

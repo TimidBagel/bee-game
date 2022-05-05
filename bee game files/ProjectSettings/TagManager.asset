@@ -5,11 +5,12 @@ TagManager:
   serializedVersion: 2
   tags:
   - Bees
+  - interactable
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - PostFX
   - Water
   - UI
   - 
