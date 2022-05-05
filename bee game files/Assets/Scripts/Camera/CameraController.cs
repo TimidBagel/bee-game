@@ -56,10 +56,11 @@ public class CameraController : MonoBehaviour
 
 			if (Physics.Raycast(ray, out hit))
 			{
-				if (hit.collider.tag == "interactable")
+				if (hit.collider.gameObject.layer == 8)
 					focusTransform = hit.transform;
 			}
 		}
+		HandleZooming();
 	}
 
 	private void HandleMouseInput()
@@ -113,6 +114,12 @@ public class CameraController : MonoBehaviour
 		if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
 			newPosition += (transform.right * movementSpeed);
 
+//		- gradually moves the camera based on altered movement variable over time
+		transform.position = Vector3.Lerp(transform.position, newPosition, Time.deltaTime * movementTime);		
+	}
+
+	private void HandleZooming()
+	{
 //		- changes the camera size target based on keyboard input, must be greater than 1
 		if (Input.GetKey(KeyCode.F) && targetCameraSize < 20)
 			targetCameraSize += cameraZoomRate * Time.deltaTime;
@@ -127,14 +134,7 @@ public class CameraController : MonoBehaviour
 		if (cam.orthographicSize > 20)
 			cam.orthographicSize = 20;
 
-//		- gradually moves the camera based on altered movement variable over time
-		transform.position = Vector3.Lerp(transform.position, newPosition, Time.deltaTime * movementTime);
-//		- gradually increases and decreases the camera size based on altered camera size target variable over time
+//		-gradually increases and decreases the camera size based on altered camera size target variable over time
 		cam.orthographicSize = Mathf.Lerp(cam.orthographicSize, targetCameraSize, Time.deltaTime * cameraZoomRate);
-	}
-
-	private void HandleZooming()
-	{
-
 	}
 }
