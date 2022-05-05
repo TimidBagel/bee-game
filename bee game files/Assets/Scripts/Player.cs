@@ -7,21 +7,42 @@ public class Player : MonoBehaviour
     public float bees;
     public GameObject baseBee;
     public float Honey;
+    //Daisies
     public float Daisies;
     public GameObject Daisy;
-    public float Sunflowers;
-    public GameObject Sunflower;
-    //Costs
-    public float costOfDaisies = 100;
-    public float CostofBees = 50;
-    public float CostOfSunflowers = 150;
-    public float AddedHoney;
+    public float costOfDaisies = 200;
+    public float DaisyPower;
     float DaisyMultiplier; // Value Set in Update Function
+    //
+    public float Sunflowers;
+    public float CostOfSunflowers = 550;
     [SerializeField] float SunMult;
+    public GameObject Sunflower;
+    public float SunflowerPower;
+   
+
+    public float CostofBees = 50;
+   
+    public float AddedHoney;
+    //Orchids
+    public float costOfOrchids = 550;
+    public float OrchidPower;
+    public GameObject Orchid;
+    public float Orchids;
+    public float OrchidMult;
+    //
+    //Milkweed
+    public float costOfMilkWeed = 500;
+    public float MilkWeedPower;
+    public GameObject MilkWeed;
+    public float MilkWeeds;
+    public float MilkMult;
+   
+    
     public World world;
     public TMPro.TextMeshProUGUI HoneyCounter;
-    public float DaisyPower;
-    public float SunflowerPower;
+   
+   
     // Start is called before the first frame update
     void Start()
     {
@@ -42,7 +63,7 @@ public class Player : MonoBehaviour
         {
             if (SceneManager.GetActiveScene().name.Contains("Kit"))
             {
-                Instantiate(thingToSpawn, new Vector3(transform.position.x + Random.Range(-5, 5), transform.position.y + Random.Range(-5, 5)), Quaternion.identity);
+                Instantiate(thingToSpawn, new Vector3(transform.position.x + Random.Range(-10, -1), transform.position.y + Random.Range(-5, 5)), Quaternion.identity);
             }
             else
             {
@@ -61,14 +82,27 @@ public class Player : MonoBehaviour
         }
 
     }
-    public void Purchase(float ValueToChange, float cost, float interest)
+    void Beehive()
+    {
+
+    }
+    void WeatherBoostedPlants(string Boostweather, float PowerToChange)
     {
        
-        
     }
     // Update is called once per frame
     void Update()
     {
+
+        
+        if (world.Weather == "Rainy")
+        {
+            OrchidPower = 1.5f;
+        }
+        else
+        {
+            OrchidPower = 1.1f;
+        }
         if(world.Weather == "Sunny")
         {
             SunflowerPower = 1.5f;
@@ -77,92 +111,42 @@ public class Player : MonoBehaviour
         {
             SunflowerPower = 1.1f;
         }
-        
+        if (world.Weather == "Windy")
+        {
+            MilkWeedPower = 1.5f;
+        }
+        else
+        {
+            MilkWeedPower = 1.1f;
+        }
+
         HoneyCounter.text = "Honey:"+ Mathf.RoundToInt(Honey).ToString();
         
         
             
         
-        GameObject[] amountBees = GameObject.FindGameObjectsWithTag("Bees");
-        GameObject[] amountDaisies = GameObject.FindGameObjectsWithTag("Daisies");
-        GameObject[] amountSunFlowers = GameObject.FindGameObjectsWithTag("Sunflowers");
+       
         DaisyMultiplier = (Daisies * DaisyPower);
-        
-        if (Sunflowers >= 1)
+        OrchidMult = (Orchids * OrchidPower);
+        SunMult = (Sunflowers * SunflowerPower);
+        if(OrchidMult == 0)
         {
-            SunMult = (Sunflowers * SunflowerPower);
+            OrchidMult = 1;
         }
-        else
+        if(SunMult == 0)
         {
             SunMult = 1;
         }
-        AddedHoney = (bees * DaisyMultiplier * SunMult) - bees;
+        if(MilkMult == 0)
+        {
+            MilkMult = 1;
+        }
+        AddedHoney = (bees * DaisyMultiplier * SunMult *OrchidMult) - bees;
         Regulate("Bees", bees, baseBee);
         Regulate("Daisies", Daisies, Daisy);
         Regulate("Sunflowers", Sunflowers, Sunflower);
-
-        //if (amountBees.Length < bees)
-        //{
-        //    if (SceneManager.GetActiveScene().name.Contains("Kit"))
-        //    {
-        //        Instantiate(baseBee, new Vector3(transform.position.x + Random.Range(-5, 5), transform.position.y + Random.Range(-5, 5)), Quaternion.identity);
-        //    }
-        //    else
-        //    {
-        //        Instantiate(baseBee, new Vector3(Random.Range(-5, 5), 0.75f, Random.Range(-5, 5)), Quaternion.identity);
-
-        //    }
-           
-        //}
-        //else if(amountBees.Length > bees)
-        //{
-        //    for(float i = amountBees.Length - bees; i > 0; i--)
-        //    {
-        //        Destroy(GameObject.FindWithTag("Bees"));
-        //    }
-            
-        //}
-
-        //if (amountDaisies.Length < Daisies)
-        //{
-        //    if (SceneManager.GetActiveScene().name.Contains("Kit"))
-        //    {
-        //        Instantiate(Daisy, new Vector3(transform.position.x + Random.Range(-5, 5), transform.position.y + Random.Range(-5, 5)), Quaternion.identity);
-        //    }
-        //    else
-        //    {
-        //        Instantiate(Daisy, new Vector3(Random.Range(-5, 5), 0.75f, Random.Range(-5, 5)), Quaternion.identity);
-
-        //    }
-        //}
-        //else if (amountDaisies.Length > Daisies)
-        //{
-        //    for (float i = amountDaisies.Length - Daisies; i > 0; i--)
-        //    {
-        //        Destroy(GameObject.FindWithTag("Daisies"));
-        //    }
-
-        //}
-        //if (amountSunFlowers.Length < Sunflowers)
-        //{
-        //    if (SceneManager.GetActiveScene().name.Contains("Kit"))
-        //    {
-        //        Instantiate(Sunflower, new Vector3(transform.position.x + Random.Range(-5, 5), transform.position.y + Random.Range(-5, 5)), Quaternion.identity);
-        //    }
-        //    else
-        //    {
-        //        Instantiate(Sunflower, new Vector3(Random.Range(-5, 5), 0.75f, Random.Range(-5, 5)), Quaternion.identity);
-
-        //    }
-        //}
-        //else if (amountSunFlowers.Length > Sunflowers)
-        //{
-        //    for (float i = amountSunFlowers.Length - Sunflowers; i > 0; i--)
-        //    {
-        //        Destroy(GameObject.FindWithTag("Sunflowers"));
-        //    }
-
-        //}
-
+        Regulate("Orchids", Orchids, Orchid);
+        Regulate("MilkWeeds", MilkWeeds, MilkWeed);
+       
     }
 }

@@ -8,6 +8,8 @@ TagManager:
   - Bees
   - Sunflowers
   - interactable
+  - Orchids
+  - MilkWeeds
   layers:
   - Default
   - TransparentFX
