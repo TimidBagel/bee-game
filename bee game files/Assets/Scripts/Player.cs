@@ -61,6 +61,11 @@ public class Player : MonoBehaviour
         }
 
     }
+    public void Purchase(float ValueToChange, float cost, float interest)
+    {
+       
+        
+    }
     // Update is called once per frame
     void Update()
     {
@@ -74,26 +79,10 @@ public class Player : MonoBehaviour
         }
         
         HoneyCounter.text = "Honey:"+ Mathf.RoundToInt(Honey).ToString();
-        if (Input.GetKeyUp("b") && Honey >= CostofBees)
-        {
-            bees += 1;
-            Honey -= CostofBees;
-            CostofBees += (CostofBees * 0.15f);
-        }
-        if(Input.GetKeyUp("d") && Honey >= costOfDaisies)
-        {
-            Daisies += 1;
-            Honey -= costOfDaisies;
-            costOfDaisies += (costOfDaisies * 0.55f);
-        }
+        
+        
             
-        if(Input.GetKeyUp("s") && Honey >= CostOfSunflowers)
-        {
-            Sunflowers += 1;
-            Honey -= CostOfSunflowers;
-            CostOfSunflowers += (CostOfSunflowers * 0.45f);
-        }
-       
+        
         GameObject[] amountBees = GameObject.FindGameObjectsWithTag("Bees");
         GameObject[] amountDaisies = GameObject.FindGameObjectsWithTag("Daisies");
         GameObject[] amountSunFlowers = GameObject.FindGameObjectsWithTag("Sunflowers");
