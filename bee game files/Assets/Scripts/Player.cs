@@ -63,7 +63,7 @@ public class Player : MonoBehaviour
         {
             if (SceneManager.GetActiveScene().name.Contains("Kit"))
             {
-                Instantiate(thingToSpawn, new Vector3(transform.position.x + Random.Range(-5, 5), transform.position.y + Random.Range(-5, 5)), Quaternion.identity);
+                Instantiate(thingToSpawn, new Vector3(transform.position.x + Random.Range(-10, -1), transform.position.y + Random.Range(-5, 5)), Quaternion.identity);
             }
             else
             {

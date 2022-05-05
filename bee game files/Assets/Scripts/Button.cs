@@ -6,10 +6,12 @@ public class Button : MonoBehaviour
 {
     public Player player;
     public TMPro.TextMeshProUGUI text;
+    public TMPro.TextMeshProUGUI ToolTip;
     // Start is called before the first frame update
     void Start()
     {
         text = gameObject.GetComponent<TMPro.TextMeshProUGUI>();
+        ToolTip.enabled = false;
     }
     private void OnMouseUpAsButton()
     {
@@ -45,25 +47,32 @@ public class Button : MonoBehaviour
             player.costOfMilkWeed += (player.costOfMilkWeed * 0.55f);
         }
     }
-
+    private void OnMouseEnter()
+    {
+        ToolTip.enabled = true;
+    }
+    private void OnMouseExit()
+    {
+        ToolTip.enabled = false;
+    }
     // Update is called once per frame
     void Update()
     {
         if(name == "BuyBee")
         {
-            text.text = "Purchse Bee  " + Mathf.RoundToInt(player.CostofBees).ToString();
+            text.text = "Purchase Bee  " + Mathf.RoundToInt(player.CostofBees).ToString();
         }
         if(name == "BuyDaisy")
         {
-            text.text = "Purchse Daisy  " + Mathf.RoundToInt(player.costOfDaisies).ToString();
+            text.text = "Purchase Daisy  " + Mathf.RoundToInt(player.costOfDaisies).ToString();
         }
         if (name == "BuySun")
         {
-            text.text = "Purchse Sunflower  " + Mathf.RoundToInt(player.CostOfSunflowers).ToString();
+            text.text = "Purchase Sunflower  " + Mathf.RoundToInt(player.CostOfSunflowers).ToString();
         }
         if(name == "BuyOrchid")
         {
-            text.text = "Purchase Orchid  " + Mathf.RoundToInt(player.costOfOrchids).ToString();
+            text.text = "Purchase Lily of the Valley  " + Mathf.RoundToInt(player.costOfOrchids).ToString();
         }
         if (name == "BuyMilkweed")
         {

@@ -8,25 +8,38 @@ public class World : MonoBehaviour
     public string Weather;
     public float shiftRate;
     public TMPro.TextMeshProUGUI WeatherReading;
-    public Sprite Filter;
-    public IEnumerator weatherShift()
+    public SpriteRenderer Filter;
+    
+    void ShiftWeather()
     {
-       
-        yield return new WaitForSeconds(shiftRate);
         Weather = WeatherTypes[Random.Range(0, WeatherTypes.Count)];
-        StartCoroutine("weatherShift");
-
     }
     // Start is called before the first frame update
     void Start()
     {
-        Weather = WeatherTypes[Random.Range(0, WeatherTypes.Count)];
-        StartCoroutine("weatherShift");
+        Weather = "Normal";
+        InvokeRepeating("ShiftWeather", shiftRate, shiftRate);
     }
 
     // Update is called once per frame
     void Update()
     {
         WeatherReading.text = "Current Weather:" + Weather;
+        if(Weather == "Normal")
+        {
+            Filter.color = new Color(Filter.color.r, Filter.color.g, Filter.color.b, 0);
+        }
+        else if(Weather == "Sunny")
+        {
+            Filter.color = new Color(.63f, .75f, .217f, 0.32f);
+        }
+        else if(Weather == "Rainy")
+        {
+            Filter.color = new Color(.255f, .246f, .95f, 0.32f);
+        }
+        else if(Weather == "Windy")
+        {
+            Filter.color = new Color(.215f, .255f, .248f, 0.32f);
+        }
     }
 }
