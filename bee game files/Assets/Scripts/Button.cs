@@ -18,19 +18,31 @@ public class Button : MonoBehaviour
             Debug.Log("ButtonClicked!");
             player.bees += 1;
             player.Honey -= player.CostofBees;
-            player.CostofBees += (player.CostofBees * 0.15f);
+            player.CostofBees += (player.CostofBees * 0.55f);
         }
         if(name == "BuyDaisy" && player.Honey >= player.costOfDaisies)
         {
             player.Daisies += 1;
             player.Honey -= player.costOfDaisies;
-            player.costOfDaisies += (player.costOfDaisies * 0.15f);
+            player.costOfDaisies += (player.costOfDaisies * 0.55f);
         }
         if (name == "BuySun" && player.Honey >= player.CostOfSunflowers)
         {
             player.Sunflowers += 1;
             player.Honey -= player.CostOfSunflowers;
-            player.CostOfSunflowers += (player.CostOfSunflowers * 0.15f);
+            player.CostOfSunflowers += (player.CostOfSunflowers * 0.55f);
+        }
+        if(name == "BuyOrchid" && player.Honey >= player.costOfOrchids)
+        {
+            player.Orchids += 1;
+            player.Honey -= player.costOfOrchids;
+            player.costOfOrchids += (player.costOfOrchids * 0.55f);
+        }
+        if (name == "BuyMilkweed" && player.Honey >= player.costOfMilkWeed)
+        {
+            player.MilkWeeds += 1;
+            player.Honey -= player.costOfMilkWeed;
+            player.costOfMilkWeed += (player.costOfMilkWeed * 0.55f);
         }
     }
 
@@ -49,6 +61,13 @@ public class Button : MonoBehaviour
         {
             text.text = "Purchse Sunflower  " + Mathf.RoundToInt(player.CostOfSunflowers).ToString();
         }
-
+        if(name == "BuyOrchid")
+        {
+            text.text = "Purchase Orchid  " + Mathf.RoundToInt(player.costOfOrchids).ToString();
+        }
+        if (name == "BuyMilkweed")
+        {
+            text.text = "Purchase Milkweed  " + Mathf.RoundToInt(player.costOfMilkWeed).ToString();
+        }
     }
 }

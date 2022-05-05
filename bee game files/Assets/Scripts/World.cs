@@ -8,7 +8,7 @@ public class World : MonoBehaviour
     public string Weather;
     public float shiftRate;
     public TMPro.TextMeshProUGUI WeatherReading;
-        
+    public Sprite Filter;
     public IEnumerator weatherShift()
     {
        
