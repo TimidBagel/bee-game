@@ -7,6 +7,8 @@ public class Button : MonoBehaviour
     public Player player;
     public TMPro.TextMeshProUGUI text;
     public TMPro.TextMeshProUGUI ToolTip;
+    public float HoneyNeeded;
+    public bool Unlocked;
     // Start is called before the first frame update
     void Start()
     {
@@ -49,7 +51,12 @@ public class Button : MonoBehaviour
     }
     private void OnMouseEnter()
     {
-        ToolTip.enabled = true;
+        if(Unlocked)
+        {
+            ToolTip.enabled = true;
+        }
+        
+
     }
     private void OnMouseExit()
     {
@@ -58,6 +65,10 @@ public class Button : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(player.Honey >= HoneyNeeded)
+        {
+            Unlocked = true;
+        }
         if(name == "BuyBee")
         {
             text.text = "Purchase Bee  " + Mathf.RoundToInt(player.CostofBees).ToString();

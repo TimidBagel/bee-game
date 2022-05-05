@@ -141,7 +141,7 @@ public class Player : MonoBehaviour
         {
             MilkMult = 1;
         }
-        AddedHoney = (bees * DaisyMultiplier * SunMult *OrchidMult) - bees;
+        AddedHoney = (bees * DaisyMultiplier * SunMult *OrchidMult *MilkMult) - bees;
         Regulate("Bees", bees, baseBee);
         Regulate("Daisies", Daisies, Daisy);
         Regulate("Sunflowers", Sunflowers, Sunflower);
