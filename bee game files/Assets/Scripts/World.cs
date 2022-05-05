@@ -11,12 +11,16 @@ public class World : MonoBehaviour
         
     public IEnumerator weatherShift()
     {
-        Weather = WeatherTypes[Random.Range(0,  WeatherTypes.Count)];
+       
         yield return new WaitForSeconds(shiftRate);
+        Weather = WeatherTypes[Random.Range(0, WeatherTypes.Count)];
+        StartCoroutine("weatherShift");
+
     }
     // Start is called before the first frame update
     void Start()
     {
+        Weather = WeatherTypes[Random.Range(0, WeatherTypes.Count)];
         StartCoroutine("weatherShift");
     }
 

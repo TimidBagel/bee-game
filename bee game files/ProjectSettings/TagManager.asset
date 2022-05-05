@@ -5,7 +5,12 @@ TagManager:
   serializedVersion: 2
   tags:
   - Bees
+<<<<<<< Updated upstream
   - interactable
+=======
+  - Daisies
+  - Sunflowers
+>>>>>>> Stashed changes
   layers:
   - Default
   - TransparentFX
