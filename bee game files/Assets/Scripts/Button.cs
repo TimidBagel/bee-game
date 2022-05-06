@@ -14,10 +14,10 @@ public class Button : MonoBehaviour
     {
         text = gameObject.GetComponent<TMPro.TextMeshProUGUI>();
         player = GameObject.Find("Player").GetComponent<Player>();
-        if (name.Contains("Fact"))
-        {
+       
+        
             ToolTip.enabled = false;
-        }
+        
         
     }
     private void OnMouseEnter()
@@ -28,6 +28,46 @@ public class Button : MonoBehaviour
         }
         
 
+    }
+    private void OnMouseUpAsButton()
+    {
+        if (name == "BuyBee" && player.Honey >= player.CostofBees)
+        {
+            Debug.Log("ButtonClicked!");
+            player.bees += 1;
+            player.Honey -= player.CostofBees;
+            player.CostofBees += (player.CostofBees * 0.55f);
+        }
+        if (name == "BuyDaisy" && player.Honey >= player.costOfDaisies)
+        {
+            player.Daisies += 1;
+            player.Honey -= player.costOfDaisies;
+            player.costOfDaisies += (player.costOfDaisies * 0.55f);
+        }
+        if (name == "BuySun" && player.Honey >= player.CostOfSunflowers)
+        {
+            player.Sunflowers += 1;
+            player.Honey -= player.CostOfSunflowers;
+            player.CostOfSunflowers += (player.CostOfSunflowers * 0.55f);
+        }
+        if (name == "BuyOrchid" && player.Honey >= player.costOfOrchids)
+        {
+            player.Orchids += 1;
+            player.Honey -= player.costOfOrchids;
+            player.costOfOrchids += (player.costOfOrchids * 0.55f);
+        }
+        if (name == "BuyMilkweed" && player.Honey >= player.costOfMilkWeed)
+        {
+            player.MilkWeeds += 1;
+            player.Honey -= player.costOfMilkWeed;
+            player.costOfMilkWeed += (player.costOfMilkWeed * 0.55f);
+        }
+        if (name == "BuyDand" && player.Honey >= player.costOfDandelions)
+        {
+            player.Dandelions += 1;
+            player.Honey -= player.costOfDandelions;
+            player.costOfDandelions += (player.costOfDandelions * 0.55f);
+        }
     }
     private void OnMouseExit()
     {
@@ -40,25 +80,29 @@ public class Button : MonoBehaviour
         {
             Unlocked = true;
         }
-        if(name == "Purchase Bee")
+        if(name == "BuyBee")
         {
             text.text = "Purchase Bee  " + Mathf.RoundToInt(player.CostofBees).ToString() + ".00";
         }
-        if(name == "Purchase Daisy")
+        if(name == "BuyDaisy")
         {
             text.text = "Purchase Daisy  " + Mathf.RoundToInt(player.costOfDaisies).ToString() + ".00";
         }
-        if (name == "Purchase Sunflower")
+        if (name == "BuySun")
         {
-            text.text = "Purchase Sunflower\n$" + Mathf.RoundToInt(player.CostOfSunflowers).ToString() + ".00";
+            text.text = "Purchase Sunflower" + Mathf.RoundToInt(player.CostOfSunflowers).ToString() + ".00";
         }
-        if(name == "Purchase Lily")
+        if(name == "BuyOrchid")
         {
-            text.text = "Purchase Lily of the Valley\n$" + Mathf.RoundToInt(player.costOfOrchids).ToString() + ".00";
+            text.text = "Purchase Lily of the Valley" + Mathf.RoundToInt(player.costOfOrchids).ToString() + ".00";
         }
-        if (name == "Purchase Milkweed")
+        if (name == "BuyMilkweed")
         {
-            text.text = "Purchase Milkweed\n$" + Mathf.RoundToInt(player.costOfMilkWeed).ToString() + ".00";
+            text.text = "Purchase Milkweed" + Mathf.RoundToInt(player.costOfMilkWeed).ToString() + ".00";
+        }
+        if(name == "BuyDand")
+        {
+            text.text = "Purchase Dandelion" + Mathf.RoundToInt(player.costOfDandelions).ToString() + ".00";
         }
     }
 }

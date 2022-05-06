@@ -9,10 +9,15 @@ public class World : MonoBehaviour
     public float shiftRate;
     public TMPro.TextMeshProUGUI WeatherReading;
     public SpriteRenderer Filter;
+    public Player player;
     
     void ShiftWeather()
     {
         Weather = WeatherTypes[Random.Range(0, WeatherTypes.Count)];
+        if(Weather == "Windy")
+        {
+            player.Dandelions += Mathf.RoundToInt(player.Dandelions * Random.Range(0, 1.1f));
+        }
     }
     // Start is called before the first frame update
     void Start()

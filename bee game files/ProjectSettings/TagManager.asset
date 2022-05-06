@@ -10,6 +10,7 @@ TagManager:
   - interactable
   - Orchids
   - MilkWeeds
+  - Dands
   layers:
   - Default
   - TransparentFX

@@ -50,8 +50,14 @@ public class Player : MonoBehaviour
     public GameObject MilkWeed;
     public float MilkWeeds;
     public float MilkMult;
-   
-    
+    //Dandelions
+    public float costOfDandelions = 1000;
+    public float DandelionPower;
+    public GameObject Dandelion;
+    public float Dandelions;
+    public float DandMult;
+
+
     public World world;
     public TMPro.TextMeshProUGUI HoneyCounter;
    
@@ -60,6 +66,7 @@ public class Player : MonoBehaviour
     void Start()
     {
         InvokeRepeating("addHoney", 1, 1);
+        DontDestroyOnLoad(gameObject);
     }
     void addHoney()
     {
@@ -76,11 +83,20 @@ public class Player : MonoBehaviour
         {
             if (SceneManager.GetActiveScene().name.Contains("Kit"))
             {
-                Instantiate(thingToSpawn, new Vector3(transform.position.x + Random.Range(-10, -1), transform.position.y + Random.Range(-5, 5)), Quaternion.identity);
+                
             }
             else
             {
-                Instantiate(thingToSpawn, new Vector3(Random.Range(-25, 25), 0.75f, Random.Range(-25, 25)), Quaternion.identity);
+                if(thingToSpawn.name == "baseBee")
+                {
+                    Instantiate(thingToSpawn, new Vector3(0, 0.75f, 0), Quaternion.identity);
+                   
+                }
+                else
+                {
+                    Instantiate(thingToSpawn, new Vector3(Random.Range(-15, 15), 0.75f, Random.Range(-15, 15)), Quaternion.identity);
+                }
+                
 
             }
 
@@ -154,12 +170,17 @@ public class Player : MonoBehaviour
         {
             MilkMult = 1;
         }
-        AddedHoney = (bees * DaisyMultiplier * SunMult *OrchidMult *MilkMult) - bees;
+        if(DandMult == 0)
+        {
+            DandMult = 1;
+        }
+        AddedHoney = (bees * DaisyMultiplier * SunMult *OrchidMult *MilkMult * DandMult) - bees;
         Regulate("Bees", bees, baseBee);
         Regulate("Daisies", Daisies, Daisy);
         Regulate("Sunflowers", Sunflowers, Sunflower);
         Regulate("Orchids", Orchids, Orchid);
         Regulate("MilkWeeds", MilkWeeds, MilkWeed);
+        Regulate("Dands", Dandelions, Dandelion);
        
     }
 }
