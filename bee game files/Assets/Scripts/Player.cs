@@ -69,6 +69,8 @@ public class Player : MonoBehaviour
     {
         InvokeRepeating("addHoney", 1, 1);
         DontDestroyOnLoad(gameObject);
+        
+        
     }
     void addHoney()
     {
@@ -124,8 +126,9 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        HoneyCounter = GameObject.Find("HoneyCounter").GetComponent<TMPro.TextMeshProUGUI>();
+        world = GameObject.Find("WorldRunner").GetComponent<World>();
 
-        
         if (world.Weather == "Rainy")
         {
             OrchidPower = 1.5f;
@@ -177,12 +180,16 @@ public class Player : MonoBehaviour
             DandMult = 1;
         }
         AddedHoney = (bees * DaisyMultiplier * SunMult *OrchidMult *MilkMult * DandMult) - bees;
-        Regulate("Bees", bees, baseBee);
-        Regulate("Daisies", Daisies, Daisy);
-        Regulate("Sunflowers", Sunflowers, Sunflower);
-        Regulate("Orchids", Orchids, Orchid);
-        Regulate("MilkWeeds", MilkWeeds, MilkWeed);
-        Regulate("Dands", Dandelions, Dandelion);
+        if(SceneManager.GetActiveScene().buildIndex != 2)
+        {
+            Regulate("Bees", bees, baseBee);
+            Regulate("Daisies", Daisies, Daisy);
+            Regulate("Sunflowers", Sunflowers, Sunflower);
+            Regulate("Orchids", Orchids, Orchid);
+            Regulate("MilkWeeds", MilkWeeds, MilkWeed);
+            Regulate("Dands", Dandelions, Dandelion);
+        }
+        
        
     }
 }
