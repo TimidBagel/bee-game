@@ -49,11 +49,11 @@ public class GameManager : MonoBehaviour
 
 	private void Update()
 	{
-		if (Input.GetKeyDown(KeyCode.Alpha1))
+		if (Input.GetKeyDown(KeyCode.Escape))
 		{
 			SceneManager.LoadScene(0);
 		}
-		if (Input.GetKeyDown(KeyCode.Alpha2))
+		if (Input.GetKeyDown(KeyCode.P))
 		{
 			SceneManager.LoadScene(1);
 		}
