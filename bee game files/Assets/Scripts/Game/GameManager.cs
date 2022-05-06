@@ -7,7 +7,8 @@ public class GameManager : MonoBehaviour
 {
 	private void Start()
 	{
-		SceneManager.LoadScene(1);
+
+		//SceneManager.LoadScene(3);
 	}
 	#region singleton
 	public static GameManager gameInstance;
@@ -55,7 +56,7 @@ public class GameManager : MonoBehaviour
 	{
 		if (Input.GetKeyDown(KeyCode.E))
 		{
-			SceneManager.LoadScene(0);
+			SceneManager.LoadScene(1);
 		}
 		if (Input.GetKeyDown(KeyCode.P))
 		{
