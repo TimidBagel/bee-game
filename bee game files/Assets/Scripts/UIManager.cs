@@ -2,7 +2,7 @@
 
 public class UIManager : MonoBehaviour
 {
-	private Player player = Player.playerInstance;
+	public Player player;
 	public GameObject storePannel;
 	public GameObject storeButton;
 	public GameObject factPannel;
