@@ -67,7 +67,7 @@ public class Player : MonoBehaviour
             }
             else
             {
-                Instantiate(thingToSpawn, new Vector3(Random.Range(-5, 5), 0.75f, Random.Range(-5, 5)), Quaternion.identity);
+                Instantiate(thingToSpawn, new Vector3(Random.Range(-25, 25), 0.75f, Random.Range(-25, 25)), Quaternion.identity);
 
             }
 
