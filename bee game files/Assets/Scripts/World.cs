@@ -24,8 +24,6 @@ public class World : MonoBehaviour
     {
         Weather = "Normal";
         InvokeRepeating("ShiftWeather", shiftRate, shiftRate);
-        player = GameObject.Find("Player").GetComponent<Player>();
-
     }
 
     // Update is called once per frame
