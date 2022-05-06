@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/KitWorkplace.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/Scenes/KitWorkplace 1.unity
+    guid: d17dba480e381e9479b0d54571f0fd4c
   m_configObjects: {}

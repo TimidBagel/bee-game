@@ -5,6 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+	private void Start()
+	{
+		SceneManager.LoadScene(1);
+	}
 	#region singleton
 	public static GameManager gameInstance;
 	private void Awake()
@@ -55,7 +59,7 @@ public class GameManager : MonoBehaviour
 		}
 		if (Input.GetKeyDown(KeyCode.P))
 		{
-			SceneManager.LoadScene(1);
+			SceneManager.LoadScene(2);
 		}
 
 	}
