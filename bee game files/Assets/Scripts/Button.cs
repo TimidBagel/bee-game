@@ -13,7 +13,12 @@ public class Button : MonoBehaviour
     void Start()
     {
         text = gameObject.GetComponent<TMPro.TextMeshProUGUI>();
-        ToolTip.enabled = false;
+        player = GameObject.Find("Player").GetComponent<Player>();
+        if (name.Contains("Fact"))
+        {
+            ToolTip.enabled = false;
+        }
+        
     }
     private void OnMouseUpAsButton()
     {
@@ -48,7 +53,7 @@ public class Button : MonoBehaviour
             player.Honey -= player.costOfMilkWeed;
             player.costOfMilkWeed += (player.costOfMilkWeed * 0.55f);
         }
-    }
+    }  
     private void OnMouseEnter()
     {
         if(Unlocked)
