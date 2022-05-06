@@ -4,7 +4,20 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 public class Player : MonoBehaviour
 {
-    public float bees;
+	#region singleton
+	public static Player playerInstance;
+	private void Awake()
+	{
+		if (playerInstance != null)
+		{
+			Debug.LogWarning("<WARNING> MORE THAN ONE INSTANCE OF PLAYER DETECTED </WARNING>");
+			return;
+		}
+		playerInstance = this;
+	}
+	#endregion
+
+	public float bees;
     public GameObject baseBee;
     public float Honey;
     //Daisies
