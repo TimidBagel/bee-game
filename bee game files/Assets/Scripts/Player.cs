@@ -5,16 +5,18 @@ using UnityEngine.SceneManagement;
 public class Player : MonoBehaviour
 {
 	#region singleton
+
 	public static Player playerInstance;
 	private void Awake()
 	{
 		if (playerInstance != null)
 		{
-			Debug.LogWarning("<WARNING> MORE THAN ONE INSTANCE OF PLAYER DETECTED </WARNING>");
+			Debug.LogWarning("More than one instance of player detected!");
 			return;
 		}
 		playerInstance = this;
 	}
+
 	#endregion
 
 	public float bees;

@@ -11,6 +11,9 @@ public class CameraController : MonoBehaviour
 	public Camera cam;
 	public Transform focusTransform;
 
+	private float time;
+	public float interval;
+
 	public float normalSpeed;
 	public float fastSpeed;
 	private float movementSpeed;
