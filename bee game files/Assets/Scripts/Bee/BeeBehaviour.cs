@@ -19,8 +19,6 @@ public class BeeBehaviour : MonoBehaviour
 		motor = GetComponent<NavMeshAgent>();
 		GetPoints();
 		UpdateDestination();
-
-		Time.timeScale = 0;
 	}
 
 	private void Update()
@@ -31,9 +29,6 @@ public class BeeBehaviour : MonoBehaviour
 			IterateWaypointIndex();
 			UpdateDestination();
 		}
-
-		if (Input.GetKeyDown(KeyCode.Space))
-			Time.timeScale = 1;
 	}
 
 	private void UpdateDestination()
