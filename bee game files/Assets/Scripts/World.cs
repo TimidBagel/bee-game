@@ -16,7 +16,7 @@ public class World : MonoBehaviour
         Weather = WeatherTypes[Random.Range(0, WeatherTypes.Count)];
         if(Weather == "Windy")
         {
-            player.Dandelions += Mathf.RoundToInt(player.Dandelions * Random.Range(0, 1.1f));
+            player.Dandelions += Mathf.RoundToInt(player.Dandelions * Random.Range(0, 0.2f));
         }
     }
     // Start is called before the first frame update
@@ -24,11 +24,15 @@ public class World : MonoBehaviour
     {
         Weather = "Normal";
         InvokeRepeating("ShiftWeather", shiftRate, shiftRate);
+        DontDestroyOnLoad(gameObject);
     }
 
     // Update is called once per frame
     void Update()
     {
+        WeatherReading = GameObject.Find("Weather Reader").GetComponent<TMPro.TextMeshProUGUI>();
+        Filter = GameObject.Find("Filter").GetComponent<SpriteRenderer>();
+        player = GameObject.Find("Player").GetComponent<Player>();
         WeatherReading.text = "Current Weather:" + Weather;
         if(Weather == "Normal")
         {

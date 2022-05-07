@@ -126,7 +126,12 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        HoneyCounter = GameObject.Find("HoneyCounter").GetComponent<TMPro.TextMeshProUGUI>();
+        if (SceneManager.GetActiveScene().name.Contains("Kit"))
+        {
+            HoneyCounter = GameObject.Find("HoneyCounter").GetComponent<TMPro.TextMeshProUGUI>();
+        }
+        DontDestroyOnLoad(GameObject.Find("Jazz"));
+        
         world = GameObject.Find("WorldRunner").GetComponent<World>();
 
         if (world.Weather == "Rainy")
